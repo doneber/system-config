@@ -1,7 +1,8 @@
 " Set compatibility to Vim only.
 set nocompatible
-set nolist
-set rnu
+" Set the numbers relavives and hide the tabs and spaces
+" set nolist
+" set rnu
 " Helps force plug-ins to load correctly when it is turned back on below.
 filetype off
 
@@ -87,6 +88,13 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 call plug#begin('~/.vim/plugged')
+" Theme
+" Plug 'morhetz/gruvbox'
+Plug 'joshdick/onedark.vim'
+" IDE
+Plug 'scrooloose/nerdtree'
+Plug 'christoomey/vim-tmux-navigator'
+" Others
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'pangloss/vim-javascript'    " JavaScript support
@@ -94,9 +102,20 @@ Plug 'leafgarland/typescript-vim' " TypeScript syntax
 Plug 'neoclide/coc.nvim' , { 'branch' : 'release' }
 Plug 'vim-airline/vim-airline'
 call plug#end()
+" Config theme
+colorscheme onedark
+let NERDTreeQuitOnOpen=1
+
 let g:coc_global_extensions = [ 'coc-tsserver' ]
 
 let g:airline_powerline_fonts = 1
+
+" Nerdtree
+let mapleader=" "
+nmap <Leader>nt :NERDTreeFind<CR>
+nmap <Leader>w :w<CR>
+nmap <Leader>q :q<CR>
+
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
